@@ -5,6 +5,23 @@
 
 <h3>Products</h3>
 
+@if (products == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    @foreach (var product in products)
+    {
+        <div>
+            <h4>@product.Name</h4>
+            <p>@product.Description</p>
+            <p>@product.Price.ToString("C")</p>
+            <img src="@product.ImageUrl" alt="@product.Name" style="width: 100px; height: 100px;" />
+        </div>
+    }
+}
+
 @code {
     private List<Product> products;
 
@@ -13,4 +30,3 @@
         products = await ProductService.GetProductsAsync();
     }
 }
-
