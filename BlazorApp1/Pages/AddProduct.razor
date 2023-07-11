@@ -1,0 +1,30 @@
+﻿@page "/addproduct"
+@using BlazorApp1.Models
+@using BlazorApp1.Services
+@inject ProductService ProductService
+@inject NavigationManager NavigationManager
+
+<h3>Add Product</h3>
+
+<EditForm Model="Product" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <InputText id="name" @bind-Value="Product.Name" />
+    <InputNumber id="price" @bind-Value="Product.Price" />
+    <InputText id="description" @bind-Value="Product.Description" />
+    <InputText id="imageUrl" @bind-Value="Product.ImageUrl" />
+
+    <button type="submit">Add Product</button>
+</EditForm>
+
+@code {
+    Product Product = new Product();
+
+    private async void HandleValidSubmit()
+    {
+        await ProductService.AddProductAsync(Product);
+        NavigationManager.NavigateTo("/products");
+    }
+
+}

@@ -1,0 +1,16 @@
+﻿@page "/products"
+@using BlazorApp1.Models
+@using BlazorApp1.Services
+@inject ProductService ProductService
+
+<h3>Products</h3>
+
+@code {
+    private List<Product> products;
+
+    protected override async Task OnInitializedAsync()
+    {
+        products = await ProductService.GetProductsAsync();
+    }
+}
+
